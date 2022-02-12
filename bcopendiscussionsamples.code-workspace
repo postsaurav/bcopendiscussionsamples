@@ -1,0 +1,25 @@
+{
+	"folders": [
+		{
+			"path": "Extend-Customer-Approval"
+		},
+		{
+			"path": "app2"
+		},
+		{
+			"path": "app3"
+		},
+		{
+			"path": "app4"
+		},
+		{
+			"path": "app5"
+		},
+		{
+			"path": "app6"
+		}
+	],
+	"settings": {
+		"window.title": "${rootName}${separator}${appName}"
+	}
+}

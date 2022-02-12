@@ -1,0 +1,29 @@
+{
+    "id":  "b4e332fa-f2b2-4fdc-bb8e-6e6d9269b3a3",
+    "name":  "Extend Customer Approval",
+    "publisher":  "bcopendiscussion",
+    "brief":  "Per Tenant Extension",
+    "description":  "Per Tenant Extension",
+    "version":  "1.0.0.0",
+    "privacyStatement":  "https://sauravdhyani.com/",
+    "EULA":  "https://sauravdhyani.com/",
+    "help":  "https://sauravdhyani.com/",
+    "url":  "https://sauravdhyani.com/",
+    "logo":  "logo/saurav.ico",
+    "dependencies":  [],
+    "screenshots":  [],
+    "application":  "19.0.0.0",
+    "platform":  "19.0.0.0",
+    "idRanges":  [
+                     {
+                         "from":  50000,
+                         "to":  99999
+                     }
+                 ],
+    "runtime":  "8.0",
+    "resourceExposurePolicy":  {
+        "allowDebugging":  true,
+        "allowDownloadingSource":  true,
+        "includeSourceInSymbolFile":  true
+    }
+}
