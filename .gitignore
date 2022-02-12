@@ -1,0 +1,8 @@
+*.app
+TestResults.xml
+
+.output
+Extend-Customer-Approval/.vscode/rad.json
+Extend-Customer-Approval/.vscode/.alcache
+Extend-Customer-Approval/.vscode/launch.json
+Extend-Customer-Approval/.vscode/launch.json
