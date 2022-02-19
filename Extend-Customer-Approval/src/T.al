@@ -2,7 +2,10 @@ tableextension 50000 MyExtension extends "My Customer"
 {
     fields
     {
-        // Add changes to table fields here
+        field(50000; MyField; Boolean)
+        {
+            DataClassification = ToBeClassified;
+        }
     }
 
     var
