@@ -1,6 +1,6 @@
 {
-    "id":  "b4e332fa-f2b2-4fdc-bb8e-6e6d9269b3a3",
-    "name":  "Extend Customer Approval",
+    "id":  "be185bc2-4601-4a96-b6cc-7ea38503be66",
+    "name":  "Attachment Management",
     "publisher":  "bcopendiscussion",
     "brief":  "Per Tenant Extension",
     "description":  "Per Tenant Extension",
@@ -16,8 +16,8 @@
     "platform":  "19.0.0.0",
     "idRanges":  [
                      {
-                         "from":  50000,
-                         "to":  50000
+                         "from":  50001,
+                         "to":  99999
                      }
                  ],
     "runtime":  "8.0",
