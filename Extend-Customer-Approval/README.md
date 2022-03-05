@@ -12,3 +12,7 @@ During Setup of Workflow, Before Enabling the workflow make sure -
 
 - [ ] For workflow event An Approval Request is approved (Pending Approval:0)  
     **Add a Response - Release the document.**
+
+## Update Workflow
+
+![Workflow Setup](https://github.com/postsaurav/bcopendiscussionsamples/blob/main/Extend-Customer-Approval/images/Setup.jpg)

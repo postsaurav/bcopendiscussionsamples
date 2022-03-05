@@ -1,8 +1,15 @@
 *.app
 TestResults.xml
-
 .output
+
 Extend-Customer-Approval/.vscode/rad.json
 Extend-Customer-Approval/.vscode/.alcache
 Extend-Customer-Approval/.vscode/launch.json
-Extend-Customer-Approval/.vscode/launch.json
+Extend-Customer-Approval/.vscode/rad.json
+Extend-Customer-Approval/.vscode/.altemplates
+
+Attachment-Management/.vscode/rad.json
+Attachment-Management/.vscode/.alcache
+Attachment-Management/.vscode/launch.json
+Attachment-Management/.vscode/rad.json
+Attachment-Management/.vscode/.altemplates
