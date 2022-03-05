@@ -1,8 +1,0 @@
-Completed - 
-1. Field - Table and Page.
-2. Check - When new document is created.
-
-Pending -
-1. Change Status during approval.
-2. Change status - modify, bank account no. change, Default dimension Change.
-3. Check Customer Status during posting & Release.
