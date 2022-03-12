@@ -1,6 +1,6 @@
 # Attachment Management
 
-This extension will allow to have read/write files in online file sharing option avilable from / to Business Central on-prem and Business Central Online (SaaS).
+This extension will allow to have read/write files in online file sharing option available from / to Business Central on-prem and Business Central Online (SaaS).
 
 ## Requirment - 
 
