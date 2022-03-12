@@ -13,3 +13,4 @@ Attachment-Management/.vscode/.alcache
 Attachment-Management/.vscode/launch.json
 Attachment-Management/.vscode/rad.json
 Attachment-Management/.vscode/.altemplates
+.vscode/.alcache/*.json
