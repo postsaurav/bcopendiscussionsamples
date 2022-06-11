@@ -36,12 +36,16 @@ table 50001 "BOD Sharepoint Setup"
             Caption = 'Site Name';
             DataClassification = CustomerContent;
             trigger OnValidate()
+            var
+                SharepointMgmt: Codeunit "BOD Sharepoint Mgmt.";
+                SiteBaseURL: Label 'https://graph.microsoft.com/v1.0/sites?search=%1', Comment = '%1 Site Name';
             begin
                 if Rec."Site Name" = '' then begin
                     Clear("Site id");
                     Validate("Document Libarary Name", '');
                     Validate("Document Folder", '');
-                end;
+                end else
+                    SharepointMgmt.GetSharepointID(StrSubstNo(SiteBaseURL, Rec."Site Name"), Rec."Site id");
             end;
         }
         field(11; "Document Libarary Name"; Text[1024])
@@ -92,4 +96,49 @@ table 50001 "BOD Sharepoint Setup"
             Clustered = true;
         }
     }
+
+    procedure GrantConsent()
+    var
+
+        OAuth2: Codeunit OAuth2;
+        Success: Boolean;
+        ErrorMsgTxt: Text;
+        CommonOAuthAuthorityUrlLbl: Label 'https://login.microsoftonline.com/common/adminconsent', Locked = true;
+        ConsentFailedErr: Label 'Failed to give consent.';
+        ConsentSuccessTxt: Label 'Consent was given successfully.';
+    begin
+        OAuth2.RequestClientCredentialsAdminPermissions(GraphMgtGeneralTools.StripBrackets(Format("Application ID")), CommonOAuthAuthorityUrlLbl, '', Success, ErrorMsgTxt);
+        if not Success then
+            if ErrorMsgTxt <> '' then
+                Error(ErrorMsgTxt)
+            else
+                Error(ConsentFailedErr);
+        Message(ConsentSuccessTxt);
+    end;
+
+    procedure GetAccessToken() AccessToken: Text
+    var
+        OAuth2: Codeunit OAuth2;
+        AuthError: Text;
+        Scopes: List of [Text];
+        PromptInteraction: Enum "Prompt Interaction";
+    begin
+        Scopes.Add('https://graph.microsoft.com/.default');
+        Rec.Get();
+        OAuth2.AcquireAuthorizationCodeTokenFromCache(GraphMgtGeneralTools.StripBrackets(Format("Application ID")),
+                                                      "Client Secret", "Redirect URL", "OAuth Redirect Url", Scopes, AccessToken);
+
+        if AccessToken <> '' then
+            exit;
+
+        OAuth2.AcquireTokenByAuthorizationCode(GraphMgtGeneralTools.StripBrackets(Format("Application ID")),
+                                              "Client Secret", "OAuth Redirect Url", "Redirect URL", Scopes, PromptInteraction::"Select Account",
+                                              AccessToken, AuthError);
+
+        if AccessToken = '' then
+            Error(AuthError);
+    end;
+
+    var
+        GraphMgtGeneralTools: Codeunit "Graph Mgt - General Tools";
 }

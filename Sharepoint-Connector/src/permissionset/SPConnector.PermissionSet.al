@@ -5,5 +5,6 @@ permissionset 50001 "SP Connector"
     Permissions =
         table "BOD Sharepoint Setup" = X,
         tabledata "BOD Sharepoint Setup" = RMID,
-        page "BOD Sharepoint Setup" = X;
+        page "BOD Sharepoint Setup" = X,
+        codeunit "BOD Sharepoint Mgmt." = X;
 }

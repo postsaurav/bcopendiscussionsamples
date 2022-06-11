@@ -73,4 +73,26 @@ page 50001 "BOD Sharepoint Setup"
             }
         }
     }
+    actions
+    {
+        area(Processing)
+        {
+            action(Consent)
+            {
+                ApplicationArea = Basic, Suite;
+                Caption = 'Grant Consent';
+                Image = Setup;
+                Promoted = true;
+                PromotedOnly = true;
+                PromotedCategory = Process;
+                Scope = Repeater;
+                ToolTip = 'Grant consent for this application to access data from Business Central.';
+                trigger OnAction()
+                begin
+                    Rec.GrantConsent();
+                end;
+            }
+        }
+    }
+
 }
