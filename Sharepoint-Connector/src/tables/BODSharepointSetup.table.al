@@ -37,15 +37,14 @@ table 50001 "BOD Sharepoint Setup"
             DataClassification = CustomerContent;
             trigger OnValidate()
             var
-                SharepointMgmt: Codeunit "BOD Sharepoint Mgmt.";
-                SiteBaseURL: Label 'https://graph.microsoft.com/v1.0/sites?search=%1', Comment = '%1 Site Name';
+                SiteBaseURLLbl: Label 'https://graph.microsoft.com/v1.0/sites?search=%1', Comment = '%1 Site Name';
             begin
                 if Rec."Site Name" = '' then begin
                     Clear("Site id");
                     Validate("Document Libarary Name", '');
                     Validate("Document Folder", '');
                 end else
-                    SharepointMgmt.GetSharepointID('https://graph.microsoft.com/v1.0/sites/root', Rec."Site id");
+                    SharepointMgmt.GetSharepointID(StrSubstNo(SiteBaseURLLbl, Rec."Site Name"), Rec."Site Name", Rec."Site id");
             end;
         }
         field(11; "Document Libarary Name"; Text[1024])
@@ -54,14 +53,18 @@ table 50001 "BOD Sharepoint Setup"
             DataClassification = CustomerContent;
             trigger OnLookup()
             var
-                SharepointMgmt: Codeunit "BOD Sharepoint Mgmt.";
-                DriveBaseURL: Label 'https://graph.microsoft.com/v1.0/sites/%1/drives', Comment = '%1 Site Name';
+                DriveBaseURLLbl: Label 'https://graph.microsoft.com/v1.0/sites/%1/drives', Comment = '%1 Drive Name';
+            begin
+                SharepointMgmt.GetSharepointID(StrSubstNo(DriveBaseURLLbl, Rec."Site id"), Rec."Document Libarary Name", Rec."Document Libarary id");
+            end;
+
+            trigger OnValidate()
             begin
                 if Rec."Document Libarary Name" = '' then begin
                     Clear("Document Libarary id");
                     Validate("Document Folder", '');
                 end else
-                    SharepointMgmt.GetDriveID(StrSubstNo(DriveBaseURL, Rec."Site id"), Rec."Document Libarary Name", Rec."Document Libarary id");
+                    Error('Please use Lookup to Select Document Library.');
             end;
         }
         field(12; "Document Folder"; Text[1204])
@@ -71,7 +74,16 @@ table 50001 "BOD Sharepoint Setup"
             trigger OnValidate()
             begin
                 if Rec."Document Folder" = '' then
-                    Clear("Document Folder id");
+                    Clear("Document Folder id")
+                else
+                    Error('Please use Lookup to Select Document Folder.');
+            end;
+
+            trigger OnLookup()
+            var
+                DocumentFolderURLLbl: Label 'https://graph.microsoft.com/v1.0/drives/%1/root/children', Comment = '%1 Folder Name';
+            begin
+                SharepointMgmt.GetSharepointID(StrSubstNo(DocumentFolderURLLbl, Rec."Document Libarary id"), Rec."Document Folder", Rec."Document Folder id");
             end;
         }
         field(20; "Site id"; Text[1024])
@@ -145,4 +157,5 @@ table 50001 "BOD Sharepoint Setup"
 
     var
         GraphMgtGeneralTools: Codeunit "Graph Mgt - General Tools";
+        SharepointMgmt: Codeunit "BOD Sharepoint Mgmt.";
 }
