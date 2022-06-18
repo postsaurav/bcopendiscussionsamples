@@ -45,19 +45,23 @@ table 50001 "BOD Sharepoint Setup"
                     Validate("Document Libarary Name", '');
                     Validate("Document Folder", '');
                 end else
-                    SharepointMgmt.GetSharepointID(StrSubstNo(SiteBaseURL, Rec."Site Name"), Rec."Site id");
+                    SharepointMgmt.GetSharepointID('https://graph.microsoft.com/v1.0/sites/root', Rec."Site id");
             end;
         }
         field(11; "Document Libarary Name"; Text[1024])
         {
             Caption = 'Document Libarary Name';
             DataClassification = CustomerContent;
-            trigger OnValidate()
+            trigger OnLookup()
+            var
+                SharepointMgmt: Codeunit "BOD Sharepoint Mgmt.";
+                DriveBaseURL: Label 'https://graph.microsoft.com/v1.0/sites/%1/drives', Comment = '%1 Site Name';
             begin
                 if Rec."Document Libarary Name" = '' then begin
                     Clear("Document Libarary id");
                     Validate("Document Folder", '');
-                end;
+                end else
+                    SharepointMgmt.GetDriveID(StrSubstNo(DriveBaseURL, Rec."Site id"), Rec."Document Libarary Name", Rec."Document Libarary id");
             end;
         }
         field(12; "Document Folder"; Text[1204])
